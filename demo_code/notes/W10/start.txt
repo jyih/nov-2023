@@ -1,1 +1,23 @@
 This directory will hold Week 10 notes files
+
+Frontend
+
+    -Client side, UI/Ux, Visuals, Makes requests to backend, Handling the responses from the backend, Send fetch requests;
+
+Backend
+
+    -Server side, Handles requests sent by the frontend, Communicates with the DB (SQL or noSQL),  data storage/handling, Sends a response back to the frontend.
+
+API
+
+    -Application Programming Interface, application that allows other applications/users to interact with.
+
+Framework
+
+    - Structure/blueprint around which we build something else. 
+    - packages, libraries that allows a developer to build something such as an API without concerning the low-level structure.
+
+Express
+
+    - Node framework/skeleton that helps your build a backend.
+
