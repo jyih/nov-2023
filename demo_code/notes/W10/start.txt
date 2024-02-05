@@ -47,3 +47,23 @@ app.<method>(<path>, <middleware>, (req, res) => {
 
 Note that/if req.body is showing undefined, in order to access the body of the request, we have to add some boilerplate middleware to the top of our app.js file
     app.use(express.json())
+
+!! Express works top => down !!
+
+Important Request object properties:
+    req.body
+        Where the rest body content can be found.
+        Requires app.use(express.json()) global middleware
+    req.params
+        Example: demonstrated on websites like IMDB
+        Usually number associated with a specific asset
+        Dynamic piece of the path
+        Syntax - use a ":" in the path to signify a param
+        /artists/:artistId
+        www.somewebsite.com/artists/123
+        req.params.artistId => 123
+    req.query
+        Dynamic piece of the URL
+        Starts with a "?" in the URL
+
+    

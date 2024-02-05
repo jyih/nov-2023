@@ -1,8 +1,14 @@
 const express = require('express');
 
-const app  = express();
+const app = express();
 
 app.use(express.json()) //allow us to access the body of the request
+
+app.get('/:example/more/:again', (req, res) => {
+    console.log(req.params)
+    res.json(req.params)
+})
+//http://localhost:9000/321/more/123
 
 app.get('/', (req, res) => {
     console.log(
