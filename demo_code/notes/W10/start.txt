@@ -21,3 +21,29 @@ Express
 
     - Node framework/skeleton that helps your build a backend.
 
+
+Route Handlers
+    App object methods:
+        get, post, put/patch, delete, all, use
+    Request path options:
+        string, array of strings, (regular expressions, array of regex, array of strings and regex)
+    Middleware:
+        Series of callback functions
+        (more in D2)
+    Response methods:
+        send (used for plain text or JSON)
+            Will be almost exclusively used for sending plain text
+        json (always send JSON)
+            set the heads and formatting for us
+
+        ** These are for server-side html rendering, so we won't be using them
+        render
+        redirect
+
+app.<method>(<path>, <middleware>, (req, res) => {
+    console.log(req.body)
+})
+
+
+Note that/if req.body is showing undefined, in order to access the body of the request, we have to add some boilerplate middleware to the top of our app.js file
+    app.use(express.json())
