@@ -130,3 +130,49 @@ const router = express.Router(); // This is the object that has all of our metho
 `app.use(<path>, routerName)`
 
 - Optionally, we can add a prefix string to the app.use to ensure that only related requests hit the router
+
+## Environment Variables
+
+There are a few common environments we will work in
+
+1. Production
+2. Development (dev)
+3. Testing - underutilized
+
+- A way to mimic the production environment locally so that we can test changes without interferring with user experience.
+
+- What's the point?
+
+- They are used to obscure sensitive data
+
+- A few ways to setup our environment variables
+
+- Add code to a route that allows us to see the environment variable.
+  - Something like `console.log(process.env.MESSAGE)`
+
+-Through the CLI
+
+`MESSAGE="hello there" node app.js`
+
+- This can be really annoying to type out every time Adding them to our script in package.json
+
+- Update start command to be: MESSAGE=wassup node app.js
+
+  - This defeats the purpose since we are pushing our package.json to github
+
+-Creating a .env file
+
+    - !! We must add .env file to our .gitignore
+
+- To access variables in our .env from our app, we have to install a couple npm packages
+
+`npm install dotenv` - `npm install dotenv-cli` (This allows us to access .env from CLI)
+
+- Next we need to add some boilerplate code to our app.js
+  `require('dotenv').config()`
+
+- It's important that this is at the top of the file so that every aspect of our app has access to our env variables
+
+- We have to make sure that our .env file is on the same level as our package.json file in the file structure
+
+- Env variables that have a value that is longer than a single word need "" if they are in the CLI, but not if they are in the .env file

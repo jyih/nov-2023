@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const petsRouter = require("./routes/pets");
 
 const app = express();
@@ -46,6 +47,7 @@ const checkUserInput3 = (req, res, next) => {
 // app.all(printPath);
 
 app.get("/test", (req, res) => {
+  console.log(process.env.MESSAGE);
   res.send("Testing");
 });
 
