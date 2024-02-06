@@ -4,11 +4,12 @@ const app = express();
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  console.log("error test");
-  const error = "There was an error";
-  next(error);
-});
+// app.use((req, res, next) => {
+//   console.log("error test");
+//   const error = new Error("There was an error");
+//   error.statusCode = 401;
+//   next(error);
+// });
 
 const printPath = (req, res, next) => {
   console.log(`path: ${req.path}`);
@@ -46,13 +47,24 @@ app.get("/test", (req, res) => {
   res.send("Testing");
 });
 
-app.post("/", (req, res) => {
-  res.send("POST");
+// app.post("/", (req, res) => {
+//   res.send("POST");
+// });
+
+app.use((req, res, next) => {
+  const notFoundErr = new Error(`${req.path} not found...`);
+  notFoundErr.statusCode = 404;
+  next(notFoundErr);
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
-  res.send(err);
+  console.log(err.message);
+  const status = err.statusCode || 500;
+  res.status(status);
+  res.json({
+    message: err.message || "Something went wrong...",
+    status,
+  });
 });
 
 const PORT = 5000;

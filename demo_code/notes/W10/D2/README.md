@@ -61,5 +61,42 @@ app.use((req, res, next) => {
 - When anything is passed into next, Express behavior changes a lot
   - Express will skip all other middleware until it finds one that takes in a 4th param (error)
   - !Important to note that the order of the params matters (err, req, res, next)
-    -To handle the error being passed, we have to create a way to catch that error Express also assumes that a route handler isn't meant to take in an error
-    -This means that even if the route handler has 4 params and matches the path, Express will not enter that endpoint.
+    - To handle the error being passed, we have to create a way to catch that error Express also assumes that a route handler isn't meant to take in an error
+    - This means that even if the route handler has 4 params and matches the path, Express will not enter that endpoint.
+
+## Error Handling Middleware
+
+- Takes in 4th arg (err) must be in 1st position
+- Generally at the end of the pipeline so that nothing is skipped and it can catch all errors.
+
+```javascript
+app.use((req, res, next) => {
+  console.log("error test");
+  const error = new Error("There was an error");
+  error.statusCode = 401;
+  next(error);
+});
+```
+
+- Anytime we generate a new error, we need to add a statusCode property to that error
+  -We also have to set the res status code in our error-handling middleware
+- !Note that we use `res.status(<status code>)` instead of `res.status = <status code>`
+
+```javascript
+app.use((err, req, res, next) => {
+  console.log(err.message);
+  const status = err.statusCode || 500;
+  res.status(status);
+  res.json({
+    message: err.message || "Something went wrong...",
+    status,
+  });
+});
+```
+
+- Why should we go through all of this work in the error handling middleware, rather than in the routes themselve?
+
+  - SRP/DRY
+  - Readability
+
+- How can we handle a 404?
