@@ -4,6 +4,12 @@ const app = express();
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log("error test");
+  const error = "There was an error";
+  next(error);
+});
+
 const printPath = (req, res, next) => {
   console.log(`path: ${req.path}`);
   next();
@@ -36,12 +42,8 @@ const checkUserInput3 = (req, res, next) => {
 // app.use("/test", printPath);
 // app.all(printPath);
 
-app.get("/test", (req, res, next) => {
-  //   res.send("Testing");
-  console.log("error test");
-  const error = new Error("There was an error");
-  error.statusCode = 401;
-  next(error);
+app.get("/test", (req, res) => {
+  res.send("Testing");
 });
 
 app.post("/", (req, res) => {

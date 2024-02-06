@@ -49,3 +49,17 @@
 
 - `app.use` is explicitly used for middleware
   The path string is not needed, but can be useful.The path does not have to match. The beginning of the path must match the prefix path added to the app.use. !Important to note that the prefix is ignored in the path that is passed into the middleware
+
+```javascript
+app.use((req, res, next) => {
+  console.log("error test");
+  const error = "There was an error :(";
+  next(error);
+});
+```
+
+- When anything is passed into next, Express behavior changes a lot
+  - Express will skip all other middleware until it finds one that takes in a 4th param (error)
+  - !Important to note that the order of the params matters (err, req, res, next)
+    -To handle the error being passed, we have to create a way to catch that error Express also assumes that a route handler isn't meant to take in an error
+    -This means that even if the route handler has 4 params and matches the path, Express will not enter that endpoint.
