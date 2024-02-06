@@ -1,8 +1,10 @@
 const express = require("express");
+const petsRouter = require("./routes/pets");
 
 const app = express();
 
 app.use(express.json());
+app.use("/pets", petsRouter);
 
 // app.use((req, res, next) => {
 //   console.log("error test");

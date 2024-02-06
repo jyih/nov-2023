@@ -100,3 +100,33 @@ app.use((err, req, res, next) => {
   - Readability
 
 - How can we handle a 404?
+
+## Routers
+
+- An extension of the `app` object
+
+```javascript
+const express = require("express"); // still need to import express
+const router = express.Router(); // This is the object that has all of our methods
+```
+
+- router object behaves like the app obj in many ways, but not all
+
+- for example, the router object cannot listen to a port, but it still has all of our methods
+
+### Create a basic get route
+
+- Now we need to attach this router to our app
+
+- First we need to export the router
+
+`module.exports = router`
+-Then we need to import that router into our app.js file
+
+`const routerName = require('./routes/router')`
+
+- Finally we have to tell Express to use that router
+
+`app.use(<path>, routerName)`
+
+- Optionally, we can add a prefix string to the app.use to ensure that only related requests hit the router
