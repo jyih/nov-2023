@@ -14,7 +14,10 @@ CREATE TABLE artists (
     genre VARCHAR(50)
 );
 
--- INSERT INTO artists (name, genre)
--- VALUES ('TOOL', "Progressive");
+INSERT INTO artists (name, genre)
+VALUES ('TOOL', "Progressive"),
+       ('Jane''s Addiction', 'Alternative'),
+       ('Weird Al Yankovich', 'Parody'),
+       ('A Tribe Called Quest', 'Hip-Hop');
 
--- SELECT * FROM artists;
+SELECT * FROM artists;

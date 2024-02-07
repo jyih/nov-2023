@@ -55,4 +55,29 @@ SQL prefers single quotes, but can allow for double quotes. NO back ticks!
 For apostrophes, we use 2 single quotation marks
 i.e. 'Kiki''s Delivery Service'
 
-We can run ".headers on" and ".mode column" to make our queries easier to read
+We can run ".headers on" and ".mode column", or "mode box" to make our queries easier to read
+
+All queries need at least 2 statements: SELECT and FROM
+
+SELECT - What columns do we want?
+FROM - What table are we querying?
+We can do more than that though
+
+WHERE - Allows us to filter or target specific values or sets of values
+We can chain multiple filters using AND/OR
+
+Delete
+
+```sql
+ DELETE FROM <table name> WHERE <condition>;
+```
+
+Note that if we leave off the WHERE clause, it will delete all of the data from that table, and it will NOT ask for confirmation
+
+Update
+
+```sql
+UPDATE <table name> SET <column name> = <value> WHERE <condition>;
+```
+
+Again, the WHERE clause is not required. If we leave it off, it will update every record in the table to have that updated value
