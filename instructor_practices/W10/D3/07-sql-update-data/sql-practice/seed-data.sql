@@ -15,3 +15,4 @@ VALUES
   ('River', 'Song');
 
 SELECT * FROM friends;
+
