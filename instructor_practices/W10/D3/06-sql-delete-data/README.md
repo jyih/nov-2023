@@ -4,9 +4,9 @@ Now, it's time to practice the SQL command to delete data from a table.
 
 ## Getting started
 
-Download the starter. `cd` into the __sql-practice__ folder.
+Download the starter. `cd` into the **sql-practice** folder.
 
-Run SQLite on a database called __practice.db__.
+Run SQLite on a database called **practice.db**.
 
 In this practice, you will use this example table to make your queries:
 
@@ -34,25 +34,25 @@ rows shown above.
 .read seed-data.sql
 ```
 
-> Remember: You can re-run this read command anytime you want to restore the 
+> Remember: You can re-run this read command anytime you want to restore the
 > data you have deleted.
 
 ## Step 1: Delete one row by primary key
 
 Delete the puppy with an `id` of `9`.
 
-> Tip: Before deleting, write a `SELECT` statement with the `WHERE` clause you 
+> Tip: Before deleting, write a `SELECT` statement with the `WHERE` clause you
 > want to use. Then simply replace `SELECT *` with `DELETE`.
 
 ## Step 2: Delete several rows with matching condition
 
-Delete all puppies which are __NOT__ `microchipped`.
+Delete all puppies which are **NOT** `microchipped`.
 
 > Remember: SQLite uses `0` for `FALSE` and `1` for `TRUE`.
 
 ## Step 3: Final result
 
-If all `DELETE`s worked as expected, you will see the following data when you 
+If all `DELETE`s worked as expected, you will see the following data when you
 run `SELECT * FROM puppies;`.
 
 | `id` | `name`   | `age_yrs` | `breed`             | `weight_lbs` | `microchipped` |
@@ -65,5 +65,5 @@ run `SELECT * FROM puppies;`.
 
 ## Congratulations!
 
-You are now able to create delete one or more rows from a database table using 
+You are now able to delete one or more rows from a database table using
 SQL `DELETE` command!
