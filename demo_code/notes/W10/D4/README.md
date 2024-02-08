@@ -55,3 +55,8 @@ We can also perform mathematical operations to our columns in a SELECT `SELECT <
 - This doesn't actually change the data in our DB
 
 We can also alias our columns in a SELECT `SELECT <column> AS <alias> FROM <table>`
+
+- The ON keyword is what tells SQL what the association is and how to combine them
+- Use dot notation to deal with abiguity in column names in the SELECT
+- The order of our values in the ON statement doesn't matter
+- The order of our JOIN statements matters when we are joining more than 2 tables together since we have to connect all the links of the chain.
