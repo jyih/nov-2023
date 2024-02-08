@@ -1,4 +1,5 @@
 PRAGMA foreign_keys = 1;
+.mode
 DROP TABLE IF EXISTS playlist_tracks;
 DROP TABLE IF EXISTS playlists;
 DROP TABLE IF EXISTS tracks;
@@ -42,6 +43,7 @@ CREATE TABLE playlists (
 );
 
 CREATE TABLE playlist_tracks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     playlist_id INTEGER REFERENCES playlists(id) ON DELETE CASCADE,
     track_id INTEGER REFERENCES tracks(id) ON DELETE CASCADE,
     playlist_order INTEGER

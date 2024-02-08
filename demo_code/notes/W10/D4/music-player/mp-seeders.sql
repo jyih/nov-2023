@@ -150,7 +150,7 @@ VALUES (1, 'Chillin'''),
        (6, 'Old School'),
        (7, 'Barb''s Playlist');
 
-INSERT INTO playlist_tracks
+INSERT INTO playlist_tracks (playlist_id, track_id, playlist_order)
 VALUES (1, 16, 1),
        (1, 17, 2),
        (1, 18, 3),
