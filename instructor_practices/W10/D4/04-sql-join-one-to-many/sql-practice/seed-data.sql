@@ -1,5 +1,6 @@
 -- Tells SQLite to enforce foreign key restrictions
 PRAGMA foreign_keys = 1;
+
 DROP TABLE IF EXISTS albums;
 DROP TABLE IF EXISTS bands;
 CREATE TABLE bands (
