@@ -23,25 +23,27 @@ CREATE TABLE albums (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     artist_id INTEGER NOT NULL,
     name VARCHAR(50) NOT NULL,
-    release_date DATE DEFAULT CURRENT_DATE
-    -- todo: set foreign key constraints
+    release_date DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tracks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    album_id INTEGER,
+    album_id INTEGER REFERENCES albums(id) ON DELETE CASCADE,
     name VARCHAR(50) NOT NULL,
     duration TIMESTAMP DEFAULT CURRENT_TIME,
     url_path VARCHAR(255) NOT NULL
-    -- todo: set foreign key constraints
 );
 
 CREATE TABLE playlists (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     name VARCHAR(30) NOT NULL
-    -- todo: set foreign key constraints
 );
 
--- todo: make a many-to-many table for playlist_tracks
+CREATE TABLE playlist_tracks (
+    playlist_id INTEGER REFERENCES playlists(id) ON DELETE CASCADE,
+    track_id INTEGER REFERENCES tracks(id) ON DELETE CASCADE,
+    playlist_order INTEGER
+);
 
