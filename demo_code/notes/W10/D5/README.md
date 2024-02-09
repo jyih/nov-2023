@@ -94,5 +94,7 @@ WHERE <FK column> = (
 ```
 
 We can change the SQL operator to handle our subquery returning multiple records
+
 Using the IN operator is the easiest way to do this
+
 Subqueries can be used in any SQL context
