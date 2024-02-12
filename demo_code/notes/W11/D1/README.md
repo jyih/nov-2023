@@ -71,6 +71,9 @@ Every time we add a UNIQUE constraint to a column, we are adding an index
 
 What is an N+1 Query?
 
+- This happens when we run an initial query, then iterate over those results and
+  and run an additional query on each result.
+
 N+1:
 
 ```js
