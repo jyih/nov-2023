@@ -222,3 +222,12 @@ await Person.bulkCreate(
 ** A statment that has helped some students in the past:
     All squares are rectangles, but not all rectangles are squares. Everything in our migrations goes into our model, but not everything in our model goes into migrations.
 ```
+
+If we change an existing migration file, the migration must be rolled back in order for the changes to take effect. This would wipe that table, causing significant loss of user data.
+
+We need to start by creating a new migration file
+
+npx sequelize migration:generate --name <descriptive name>
+If we set allowNull: false to the new column, we run into an error
+
+We can get around this error by setting a defaultValue property
