@@ -1,5 +1,7 @@
 "use strict";
 
+const { User } = require("../models");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -12,21 +14,39 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert(
-      "Users",
+    // await queryInterface.bulkInsert(
+
+    //   "Users",
+    //   [
+    //     {
+    //       name: "John Doe",
+    //       createdAt: new Date(),
+    //       updatedAt: new Date(),
+    //     },
+    //     {
+    //       name: "Shane Wilkey",
+    //       createdAt: new Date(),
+    //       updatedAt: new Date(),
+    //     },
+    //   ],
+    //   {}
+    // );
+    await User.bulkCreate(
       [
         {
           name: "John Doe",
-          createdAt: new Date(),
-          updatedAt: new Date(),
         },
         {
           name: "Shane Wilkey",
-          createdAt: new Date(),
-          updatedAt: new Date(),
+        },
+        {
+          name: "Jane Doe",
+        },
+        {
+          name: "Oliver Wilkey",
         },
       ],
-      {}
+      { validate: true }
     );
   },
 
