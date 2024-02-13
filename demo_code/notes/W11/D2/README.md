@@ -114,3 +114,111 @@ Important notes
 - We will be switching from snake_case to camelCase for our column names
 - Make sure that any changes we make to migrations, such as adding constraints, we need to add those changes to the model as well
 - Making changes to our model does not mean we need to run any additional commands
+
+## Seeders
+
+- For inserting starter data into tables
+
+- There are 2 types of commands:
+  - Commands that create files
+  - Commands that interact with the db
+    These require us to add "dotenv" to the command
+
+Now that we have created a table, we need to create a seeder file
+
+CLI commands:
+
+- `npx sequelize seed:generate --name <name>`
+- `npx dotenv sequelize db:seed:all`
+  - Runs all seeders that haven't been ran
+- `npx dotenv sequelize db:seed:undo`
+  - Rolls back the most recent seed file
+- `npx dotenv sequelize db:seed:undo:all`
+  - Rolls back all seeder files
+
+## Important notes
+
+The seeder bulkInsert method tests against table constraints, but not against
+the model constraints
+
+queryInterface is an object built into Sequelize and has a ton of built-in methods
+
+One thing that will help you out with Sequelize is envisioning the SQL that
+Sequelize will be creating
+
+The seederStorage property in our config/database.js file is what gives us the
+SequelizeData file in our DB
+
+Database reset script:
+
+```js
+    "dbreset": "npx dotenv sequelize db:seed:undo:all && npx dotenv sequelize db:migrate:undo:all && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
+```
+
+```
+    ** Look up Sequelize validators on Google
+        https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/#validators
+    ** Add some validators to the model
+```
+
+If we want our seeders to check against our model validations, we have to take a couple extra steps
+
+We will be utilizing our model's built-in bulkCreate method
+
+```js
+// Instead of bulkInsert like below, we will replace with bulkCreate
+// Insert into People using queryInterface.bulkInsert:
+await queryInterface.bulkInsert(
+  "People",
+  [
+    {
+      name: "John Doe",
+      isBetaMember: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ],
+  {}
+);
+
+// First we need to import our model into the seed file:
+
+// Insert into People using Person.bulkCreate:
+const { Person } = require("../db/models");
+
+// Then set up a bulkCreate statement
+
+await Person.bulkCreate(
+  [
+    {
+      name: "John Doe",
+      isBetaMember: false,
+    },
+  ],
+  { validate: true }
+);
+
+// will throw an error from model-validation:
+await Person.bulkCreate(
+  [
+    {
+      name: "John Doe",
+      isBetaMember: "yes",
+    },
+  ],
+  { validate: true }
+);
+```
+
+```js
+    await <model>.bulkCreate({
+        <seeders>
+    }, { validate: true })
+```
+
+**`bulkCreate` instead of `bulkInsert` is highly recommended**
+
+```
+** A statment that has helped some students in the past:
+    All squares are rectangles, but not all rectangles are squares. Everything in our migrations goes into our model, but not everything in our model goes into migrations.
+```
