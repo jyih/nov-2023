@@ -35,6 +35,7 @@ module.exports = {
       [
         {
           name: "John Doe",
+          email: "john@doe",
         },
         {
           name: "Shane Wilkey",
