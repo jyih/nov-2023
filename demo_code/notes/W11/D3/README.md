@@ -119,16 +119,21 @@ If we want to use LIKE in our query, we can do so using the sequelize.Op package
 
 ## Build/Create
 
-- Build is used for creating records. It consists of a few steps
-  - Build
-  - Validate (optional)
-  - Save
+Build is used for creating records. It consists of a few steps
+
+- Build
+- Validate (optional)
+- Save
 
 Create
 
 - Does all of the other 3
 
 We have to destructure our req.body
+
+```
+const {col1, col2 col3, etc...} = req.body;
+```
 
 To use build:
 
