@@ -152,3 +152,26 @@ await <instance> = <model>.create({<data>})
 
     res.json(<instance>)
 ```
+
+## Updating/Deleting in Sequelize
+
+There are multiple ways to Update:
+
+`<model>.update` - NOT recommended due to us running into a lot of issues with this method
+
+This requires a where Object property reassignment
+
+Major preference and what we will be using
+
+- Instance.save()
+- Instance.update()
+
+We want to make sure that we are not accidentally updating our properties to undefined
+
+This is done by checking the parts of the req.body to make sure they exist before updating
+
+There are multiple ways to Delete:
+
+`<model>.destroy()` - NOT recommended for the same reasons as update
+
+`<instance>.destroy()`
