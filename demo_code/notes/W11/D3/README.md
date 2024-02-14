@@ -227,3 +227,48 @@ belongsToMany(models.<name of the model on other side of joins table>, {
     otherKey: <FK to join from join table to other table>
 })
 ```
+
+## Implementing these relationships in our Express
+
+```
+\*\* Create a route to do a getAll with the relationship
+```
+
+In our query object, we need to add an include property that points to the model we want to join.
+
+Since we are referencing another model, we need to make sure and add that model to our imports.
+
+```js
+include: <model name>
+```
+
+We can also add multiple models to the join by pointing the include property to an array
+
+```js
+include: [<model 1>, <model 2>]
+```
+
+We can also point include to an object or an array of objects
+
+```js
+include: {
+    model: <model name>
+}
+```
+
+```
+\*\* Talk about including attributes and where properties to our include object
+```
+
+We can also have nested includes
+
+If we don't want any of the info from our join table, we can add a through property to one of our includes objects. That through property will also point to an object with attributes: []
+
+```js
+include: {
+    model: <model name>,
+    through: {
+        attributes: []
+    }
+}
+```

@@ -72,7 +72,12 @@ router.get("/order", async (req, res) => {
 
 router.get("/playlist", async (req, res) => {
   const playlist = await Playlist.findAll({
-    include: { model: Track },
+    include: {
+      model: Track,
+      through: {
+        attributes: ["playlistID"],
+      },
+    },
   });
 
   res.json(playlist);
