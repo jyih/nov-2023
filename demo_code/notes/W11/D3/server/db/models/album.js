@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Sequelize } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Album extends Model {
     /**
@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [1, 100],
+        },
+        releaseDate: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: Sequelize.literal("CURRENT_DATE"),
         },
       },
     },
