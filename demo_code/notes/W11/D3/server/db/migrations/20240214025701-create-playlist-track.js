@@ -12,10 +12,12 @@ module.exports = {
       playlistID: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: "Playlists" },
       },
       trackID: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: "Tracks" },
       },
       playlistOrder: {
         allowNull: false,

@@ -12,6 +12,8 @@ module.exports = {
       artistId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: "Artists" },
+        onDelete: "CASCADE",
       },
       name: {
         type: Sequelize.STRING,

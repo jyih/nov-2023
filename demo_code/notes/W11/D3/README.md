@@ -175,3 +175,55 @@ There are multiple ways to Delete:
 `<model>.destroy()` - NOT recommended for the same reasons as update
 
 `<instance>.destroy()`
+
+## Relationships in Sequelize
+
+To tell Sequelize that a column is a FK, we need to add a couple properties to that column obj
+
+```js
+references: {
+model: <table name>,
+key: 'id' (not needed unless PK is something besides id)
+},
+onDelete: 'CASCADE' (if desired)
+```
+
+Next we have to connect our models, and this is done by using Associations
+
+- Associations
+- One to One
+- hasOne - not used much
+- One to Many
+- belongsTo
+- hasMany
+
+We have to determine which is which and the order does matter
+
+The model with the FK is the belongsTo
+
+```js
+<model we are in>.<relationship>(models.<name of the model we are connecting to>, {
+    foreignKey: <name of the FK being used to connect>
+})
+```
+
+```
+Demonstrate what the SQL for the JOIN ON would look like on both sides
+```
+
+In order to CASCADE Delete, we need to add some additional stuff to the hasMany
+
+- `onDelete: 'CASCADE'`,
+- `hooks: true`
+
+The `hooks: true` enforces that the deletions occur in the right order. If this is left off, we can still run into the Foreign Key Constraint Failed errors
+
+### Many to Many
+
+```js
+belongsToMany(models.<name of the model on other side of joins table>, {
+    through: models.<name of model for join table>,
+    foreignKey: <FK to join to join table>,
+    otherKey: <FK to join from join table to other table>
+})
+```

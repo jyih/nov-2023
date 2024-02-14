@@ -1,6 +1,13 @@
 const express = require("express");
 
-const { User, Album, Track } = require("../db/models");
+const {
+  User,
+  Album,
+  Track,
+  Artist,
+  Playlist,
+  PlaylistTrack,
+} = require("../db/models");
 
 const router = express.Router();
 
@@ -23,6 +30,9 @@ router.get("/where", async (req, res) => {
     attributes: ["artistId", "name"],
     where: {
       artistId: 2,
+    },
+    include: {
+      model: Artist,
     },
   });
 
@@ -58,6 +68,14 @@ router.get("/order", async (req, res) => {
   });
 
   res.json(tracks);
+});
+
+router.get("/playlist", async (req, res) => {
+  const playlist = await Playlist.findAll({
+    include: { model: Track },
+  });
+
+  res.json(playlist);
 });
 
 module.exports = router;
