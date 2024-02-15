@@ -22,24 +22,25 @@ app.get("/toys-summary", async (req, res, next) => {
         Set it to a variable called `count`.
     */
   // Your code here
-
+  const count = await Toy.count();
   /*
         STEP 1B: Calculate the minimum price of all the toy records.
         Set it to a variable called `minPrice`.
     */
   // Your code here
-
+  const minPrice = await Toy.min("price");
   /*
         STEP 1C: Calculate the maximum price of all the toy records.
         Set it to a variable called `maxPrice`.
     */
   // Your code here
-
+  const maxPrice = await Toy.max("price");
   /*
         STEP 1D: Calculate the sum of the prices of all the toy records.
         Set it to a variable called `sumPrice`.
     */
   // Your code here
+  const sumPrice = await Toy.sum("price");
 
   res.json({
     count,
@@ -59,27 +60,33 @@ app.get("/cats/:catId", async (req, res, next) => {
   /* 
         STEP 2A: Find a cat with their associated toys
     */
-  const cat = {};
+  const cat = await Cat.findByPk(catId, {
+    include: Toy,
+  });
+
+  // console.log(cat);
 
   const toys = cat.Toys;
+
+  // console.log(toys);
 
   /* 
         STEP 2B: Calculate the total amount of toys that the cat is
         associated with.
     */
-  let toyCount;
+  const toyCount = toys.length;
 
   /*
         STEP 2C: Calculate the total price of all the toys that the cat is
         associated with
     */
-  let toyTotalPrice;
+  const toyTotalPrice = toys.reduce((total, toy) => total + toy.price, 0);
 
   /*
         STEP 2D: Calculate the average price of all the toys that the cat is
         associated with
     */
-  let toyAvgPrice;
+  const toyAvgPrice = toyTotalPrice / toyCount;
 
   res.json({
     toyCount,
@@ -99,27 +106,44 @@ app.get("/toys/:toyId", async (req, res, next) => {
     STEP 4A: Find a toy with their associated cats
     */
   // Your code here
+  const toy = await Toy.findByPk(req.params.toyId, {
+    include: [{ model: Cat }],
+  });
   /* 
         STEP 4B: Find or calculate the total amount of cats that the toy is
         associated with.
     */
   // Your code here
+  const cats = toy.Cats;
+
+  const catCount = cats.length;
   /*
         STEP 4C: Find or calculate the total amount of cats that have a color of
         "Orange" and that the toy is associated with.
     */
   // Your code here
+  const orangeCatCount = cats.filter((cat) => cat.color === "Orange").length;
+
   /*
         STEP 4D: Find or calculate the percentage of cats that have a color of
         "Orange" and that the toy is associated with.
     */
   // Your code here
+  const orangeCatPercentage = `${Math.round(
+    (orangeCatCount / catCount) * 100
+  )}%`;
   /*
         STEP 4E: Return the toy, its associated cats, the count of
         cats associated with the toy, the count of orange cats associated with
         the toy, and the percentage of orange cats that the toy is associated.
     */
   // Your code here
+  res.json({
+    catCount,
+    orangeCatCount,
+    orangeCatPercentage,
+    ...toy.toJSON(),
+  });
 });
 
 // Root route - DO NOT MODIFY
