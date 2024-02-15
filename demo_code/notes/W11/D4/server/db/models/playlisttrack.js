@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       playlistOrder: {
         type: DataTypes.INTEGER,
-        allowNull: false,
       },
     },
     {

@@ -1,6 +1,6 @@
-# Association Methods and Aggregate Data
+# Association Methods
 
-## Association Methods
+All of our instances have helpful methods that allow us to quickly work with our associations.
 
 ## Getter method
 

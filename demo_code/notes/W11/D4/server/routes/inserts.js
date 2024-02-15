@@ -12,7 +12,7 @@ router.post("/build", async (req, res) => {
     password,
   });
 
-  newUser.validate();
+  await newUser.validate();
 
   await newUser.save();
 

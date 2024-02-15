@@ -20,7 +20,6 @@ module.exports = {
         references: { model: "Tracks" },
       },
       playlistOrder: {
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       createdAt: {
