@@ -10,6 +10,7 @@ const aggregatesRouter = require("./routes/aggregates");
 const app = express();
 
 app.use(express.json());
+app.use('/styling', express.static('assets/css'));
 
 app.use("/selects", selectsRouter);
 app.use("/inserts", insertsRouter);
