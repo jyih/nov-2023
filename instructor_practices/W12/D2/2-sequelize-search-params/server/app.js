@@ -21,6 +21,8 @@ app.get('/musicians', async (req, res, next) => {
         include: []
     };
 
+    const { firstName, lastName, bandName, instrumentTypes } = req.query;
+
     // Pagination Options
     // ?page=XX&size=YY
     // A limit and offset are calculated and added in as keys to the query
@@ -38,13 +40,16 @@ app.get('/musicians', async (req, res, next) => {
     // Add keys to the WHERE clause to match the firstName param, if it exists.
     // End result: { where: { firstName: req.query.firstName } }
 
-    // Your code here 
+    if (firstName) {
+        query.where.firstName = firstName;
+    };
     
     // Add keys to the WHERE clause to match the lastName param, if it exists.
     // End result: { where: { lastName: req.query.lastName } }
     
-    // Your code here 
-
+    if (lastName) {
+        query.where.lastName = lastName;
+    };
 
     // STEP 2: WHERE clauses on the associated Band model
     // ?bandName=XX
@@ -52,7 +57,14 @@ app.get('/musicians', async (req, res, next) => {
     // name matches the bandName param, if it exists.
     // End result: { include: [{ model: Band, where: { name: req.query.bandName } }] }
 
-    // Your code here 
+    if (bandName) {
+        query.include.push({
+            model: Band,
+            where: {
+                name: bandName
+            }
+        })
+    };
 
 
     // STEP 3: WHERE Clauses on the associated Instrument model 
@@ -70,7 +82,17 @@ app.get('/musicians', async (req, res, next) => {
         }] } 
     */
 
-    // Your code here 
+    if (instrumentTypes) {
+        query.include.push({
+            model: Instrument,
+            where: {
+                type: instrumentTypes
+            },
+            through: {
+                attributes: []
+            }
+        });
+    };
 
 
     // BONUS STEP 4: Specify Musician attributes to be returned
