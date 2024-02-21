@@ -12,6 +12,8 @@ XSS Attacks - Cross-Site Scripting
     Often used for malicious intent, but not always
         Myspace is a great example
 
-
+CSRF Attack - Cross-Site Resource Forgery
+    When someone creates their own requests and tricks another user into sending that request
+    Pretty common for XSS and CSRF attacks to happen together, but not always
 
 */

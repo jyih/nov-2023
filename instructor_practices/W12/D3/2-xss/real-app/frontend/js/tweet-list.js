@@ -73,12 +73,12 @@ const createTweetBody = (tweet) => {
   tweetBody.classList.add("tweet-body");
 
   /* ------------------------- Prevent XSS Attacks ------------------------ */
-  // const bodyText = document.createTextNode(tweet.body);
-  // tweetBody.appendChild(bodyText);
+  const bodyText = document.createTextNode(tweet.body);
+  tweetBody.appendChild(bodyText);
   /* ---------------------------------------------------------------------- */
 
   /* -------------------------- Allow XSS Attacks ------------------------- */
-  tweetBody.innerHTML = tweet.body;
+  // tweetBody.innerHTML = tweet.body;
   /* ---------------------------------------------------------------------- */
 
   return tweetBody;
