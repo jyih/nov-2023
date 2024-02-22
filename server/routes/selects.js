@@ -60,11 +60,15 @@ router.get("/find-by-pk/:id", async (req, res) => {
 });
 
 router.get("/order", async (req, res) => {
-  const tracks = await Track.findAll({
+  const { albumName } = req.query;
+  
+  const tracks = await Track.scope('defaultScope', 'onlyNameAndDuration', {
+    method: ['includeAlbum', albumName]
+  }).findAll({
     order: [
       ["albumID", "DESC"],
       ["name", "ASC"],
-    ],
+    ]
   });
 
   res.json(tracks);

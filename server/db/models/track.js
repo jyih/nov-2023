@@ -39,6 +39,28 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Track",
+      defaultScope: {
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'duration']
+        }
+        // attributes: ['createdAt', 'updatedAt']
+      },
+      scopes: {
+        onlyNameAndDuration: {
+          attributes: ['name', 'duration']
+        },
+        includeAlbum(albumName) {
+          const { Album } = require('../models');
+          return {
+            include: {
+              model: Album,
+              where: {
+                name: albumName
+              }
+            }
+          }
+        }
+      }
     }
   );
   return Track;
