@@ -28,5 +28,38 @@ Couple ways to add scopes:
                 [<func scope name>, <args>]
 
 
+JWT - JSON Web Token
+
+    This is how we handle User Auth
+        If we want to log a user in, we create a token. If we want to log a user out, we delete that token.
+
+How can we keep data safe as we transport it across the web?
+    Encode
+        Not very secure. Can easily be decoded.
+    Encrypting
+        More secure. Can't be decrypted unless they have the secret/password
+        If a bad user gets that secret key, we are in trouble
+    Hash
+        Cannot be reverse-engineered
+        Hashing is deterministic
+        There is a problem here: There is a possibility that multiple strings could end up hashing to the same value
+            This is called a hash collision
+        We can use something called a Salt to avoid this hash collision issue
+
+JWTs
+    Consists of 3 parts:
+        Header
+            Contains the type of token
+            Indicator for the algo that we use
+            JWT will automatically set this
+        Payload
+            The data we are transmitting
+            Can add Claims - such as an expiration
+            ONLY Encoded
+        Signature
+            Hash of the header, payload, and a secret key
+            Allows us to validate that our token hasn't been tampered with
+
+
 
 */
