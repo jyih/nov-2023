@@ -61,5 +61,12 @@ JWTs
             Allows us to validate that our token hasn't been tampered with
 
 
+Bcrypt
+    The has provided consists of algo, cost, salt (22 char), and hash
+
+    The cost factor tells bcrypt how many times to hash the password
+    We don't want to set the cost factor too high
+        Setting the cost factor to around 12-13 is the recommendation
+
 
 */

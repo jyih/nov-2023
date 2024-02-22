@@ -14,7 +14,7 @@
     "chai": "^4.2.0",
     "chai-spies": "^1.0.0",
     "dotenv": "^16.0.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "mocha": "^6.2.2",
     "test-console": "^2.0.0"
   },
